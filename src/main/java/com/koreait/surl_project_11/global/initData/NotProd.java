@@ -68,5 +68,8 @@ public class NotProd {
 
         List<Article> articles = articleRepository.findAll(); // JpaRepository 기본 제공
 
+        List<Article> articlesByIn = articleRepository.findByIdInOrderByTitleDescIdAsc(List.of(1L, 2L));
+        articleRepository.findByTitleContaining("제목");
+        articleRepository.findByTitleAndBody("제목", "내용");
     }
 }
