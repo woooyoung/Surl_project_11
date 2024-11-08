@@ -5,12 +5,14 @@ import com.koreait.surl_project_11.domain.article.article.repository.ArticleRepo
 import com.koreait.surl_project_11.global.rsData.RsData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class ArticleService {
     private final ArticleRepository articleRepository;
 
@@ -22,6 +24,7 @@ public class ArticleService {
     // - 이번에 생성된 게시글의 번호
     // - 게시글 생성에 대한 결과 메세지
     // - 결과 코드
+    @Transactional
     public RsData<Article> write(String title, String body) {
         Article article = Article
                 .builder()
@@ -34,6 +37,7 @@ public class ArticleService {
         return RsData.of("%d번 게시글이 생성됨".formatted(article.getId()), article);
     }
 
+    @Transactional
     public void delete(Article article) {
         articleRepository.delete(article);
     }
