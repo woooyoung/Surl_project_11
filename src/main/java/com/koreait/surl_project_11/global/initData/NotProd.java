@@ -43,12 +43,12 @@ public class NotProd {
 
         //articleRepository.deleteAll();
 
-        Article article1 = Article.builder().
-                title("제목1")
+        Article article1 = Article.builder()
+                .title("제목1")
                 .body("내용1").build();
 
-        Article article2 = Article.builder().
-                title("제목2")
+        Article article2 = Article.builder()
+                .title("제목2")
                 .body("내용2").build();
 
 
