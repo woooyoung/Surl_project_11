@@ -13,9 +13,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Profile;
 
-import java.util.List;
-import java.util.Optional;
-
 // !prod == dev or test
 @Profile("!prod")
 @Configuration
@@ -36,7 +33,6 @@ public class NotProd {
     public ApplicationRunner initNotProd() {
         return args -> {
             self.work1();
-            self.work2();
         };
     }
 
@@ -44,26 +40,14 @@ public class NotProd {
     public void work1() {
         if (articleService.count() > 0) return;
 
-        Member member1 = memberService.join("user1", "1234", "유저 1").getData();
-        Member member2 = memberService.join("user2", "1234", "유저 2").getData();
+        Member memberUser1 = memberService.findByUsername("user1").get();
+        Member memberUser2 = memberService.findByUsername("user2").get();
 
-        Article article1 = articleService.write(member1,"제목 1", "내용 1").getData();
-        Article article2 = articleService.write(member1,"제목 2", "내용 2").getData();
+        Article article1 = articleService.write(memberUser1,"제목 1", "내용 1").getData();
+        Article article2 = articleService.write(memberUser1,"제목 2", "내용 2").getData();
 
-        Article article3 = articleService.write(member2,"제목 3", "내용 3").getData();
-        Article article4 = articleService.write(member2,"제목 4", "내용 4").getData();
-
-        article2.setTitle("제목 2-2");
-
-        articleService.delete(article1);
+        Article article3 = articleService.write(memberUser2,"제목 3", "내용 3").getData();
+        Article article4 = articleService.write(memberUser2,"제목 4", "내용 4").getData();
     }
 
-    @Transactional
-    public void work2() {
-        // List : 0 ~ N
-        // Optional : 0 ~ 1
-        Optional<Article> opArticle = articleService.findById(2L); // JpaRepository 기본 제공
-
-        List<Article> articles = articleService.findAll(); // JpaRepository 기본 제공
-    }
 }
