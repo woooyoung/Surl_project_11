@@ -1,8 +1,10 @@
 package com.koreait.surl_project_11.domain.surl.surl.controller;
 
+import com.koreait.surl_project_11.domain.member.member.entity.Member;
 import com.koreait.surl_project_11.domain.surl.surl.entity.Surl;
 import com.koreait.surl_project_11.domain.surl.surl.service.SurlService;
 import com.koreait.surl_project_11.global.eceptions.GlobalException;
+import com.koreait.surl_project_11.global.rq.Rq;
 import com.koreait.surl_project_11.global.rsData.RsData;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -17,12 +19,24 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SurlController {
 
+    private final Rq rq;
     private final SurlService surlService;
 
     @GetMapping("/add")
     @ResponseBody
     public RsData<Surl> add(String body, String url) {
-        return surlService.add(body, url);
+
+        Member member = rq.getMember(); // 현재 브라우저로 로그인 한 회원 정보
+
+        System.out.println("before get id");
+        member.getId();
+        System.out.println("after get id");
+
+        System.out.println("before get username");
+        member.getUsername();
+        System.out.println("after get username");
+
+        return surlService.add(member, body, url);
     }
 
     @GetMapping("/s/{body}/**")
@@ -31,6 +45,8 @@ public class SurlController {
             @PathVariable String body,
             HttpServletRequest req
     ) {
+        Member member = rq.getMember();
+
         String url = req.getRequestURI();
 
         if (req.getQueryString() != null) {
@@ -41,7 +57,7 @@ public class SurlController {
 
         url = urlBits[3];
 
-        return surlService.add(body, url);
+        return surlService.add(member, body, url);
     }
 
     @GetMapping("/g/{id}")

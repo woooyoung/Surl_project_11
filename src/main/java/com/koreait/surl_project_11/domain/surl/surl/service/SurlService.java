@@ -1,5 +1,6 @@
 package com.koreait.surl_project_11.domain.surl.surl.service;
 
+import com.koreait.surl_project_11.domain.member.member.entity.Member;
 import com.koreait.surl_project_11.domain.surl.surl.entity.Surl;
 import com.koreait.surl_project_11.domain.surl.surl.repository.SurlRepository;
 import com.koreait.surl_project_11.global.rsData.RsData;
@@ -22,8 +23,9 @@ public class SurlService { // 비지니스 로직 처리 담당
     }
 
     @Transactional
-    public RsData<Surl> add(String body, String url) {
+    public RsData<Surl> add(Member author, String body, String url) {
         Surl surl = Surl.builder()
+                .author(author)
                 .body(body)
                 .url(url).build();
 
