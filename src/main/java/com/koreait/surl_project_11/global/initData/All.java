@@ -31,6 +31,7 @@ public class All {
 
     @Transactional
     public void work1() {
+
         log.debug("initAll started");
 
         if (memberService.count() > 0) return;
