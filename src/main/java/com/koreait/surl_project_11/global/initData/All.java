@@ -10,6 +10,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.core.annotation.Order;
 
 @Configuration
 @RequiredArgsConstructor
@@ -21,6 +22,7 @@ public class All {
     private final MemberService memberService;
 
     @Bean
+    @Order(3)
     public ApplicationRunner initAll() {
         return args -> {
             self.work1();
