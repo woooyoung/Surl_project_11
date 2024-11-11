@@ -2,7 +2,7 @@ package com.koreait.surl_project_11.domain.member.member.service;
 
 import com.koreait.surl_project_11.domain.member.member.entity.Member;
 import com.koreait.surl_project_11.domain.member.member.repository.MemberRepository;
-import com.koreait.surl_project_11.global.eceptions.GlobalException;
+import com.koreait.surl_project_11.global.exceptions.GlobalException;
 import com.koreait.surl_project_11.global.rsData.RsData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

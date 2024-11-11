@@ -3,7 +3,7 @@ package com.koreait.surl_project_11.domain.surl.surl.controller;
 import com.koreait.surl_project_11.domain.member.member.entity.Member;
 import com.koreait.surl_project_11.domain.surl.surl.entity.Surl;
 import com.koreait.surl_project_11.domain.surl.surl.service.SurlService;
-import com.koreait.surl_project_11.global.eceptions.GlobalException;
+import com.koreait.surl_project_11.global.exceptions.GlobalException;
 import com.koreait.surl_project_11.global.rq.Rq;
 import com.koreait.surl_project_11.global.rsData.RsData;
 import jakarta.servlet.http.HttpServletRequest;
