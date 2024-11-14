@@ -34,7 +34,7 @@ jobs:
           draft: false
           prerelease: false
   buildImageAndPush:
-    name: 도커 이미지 빌드와 푸시
+    name: 도커 이미지 빌드와  푸시
     needs: makeTagAndRelease
     runs-on: ubuntu-latest
     steps:
