@@ -24,6 +24,7 @@ public class MemberService {
     @Transactional
     // @Transactional(noRollbackFor = GlobalException.class)
     public RsData<Member> join(String username, String password, String nickname) {
+
         findByUsername(username).ifPresent(ignored -> {
             throw new GlobalException("400-1", "이미 존재하는 아이디야");
         });
