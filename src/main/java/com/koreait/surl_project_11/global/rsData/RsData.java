@@ -36,7 +36,7 @@ public class RsData<T> {
     }
 
     public static <T> RsData<T> of(String msg, T data) {
-        return of("200-1", msg, data);
+        return of("201-1", msg, data);
     }
 
     public static <T> RsData<T> of(String resultCode, String msg) {
