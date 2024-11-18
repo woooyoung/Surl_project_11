@@ -17,11 +17,16 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(GlobalException.class)
     //@ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public ResponseEntity<String> handleException(GlobalException ex) {
+    public ResponseEntity<RsData<Empty>> handleException(GlobalException ex) {
+
+        log.debug("handleException started!");
+
         RsData<Empty> rsData = ex.getRsData();
 
         rsData.getStatusCode();
 
-        return ResponseEntity.status(rsData.getStatusCode()).body(rsData.getMsg());
+        return ResponseEntity
+                .status(rsData.getStatusCode())
+                .body(rsData);
     }
 }
