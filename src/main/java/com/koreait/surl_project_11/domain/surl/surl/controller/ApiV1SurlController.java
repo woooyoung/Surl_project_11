@@ -96,12 +96,7 @@ public class ApiV1SurlController {
     }
 
     @GetMapping("")
-    public RsData<SurlGetItemsRespBody> getItems(
-            String actorUsername
-    ) {
-        Member logindMember = memberService.findByUsername(actorUsername).orElseThrow(GlobalException.E404::new);
-
-        rq.setMember(logindMember);
+    public RsData<SurlGetItemsRespBody> getItems() {
 
         Member member = rq.getMember();
 
