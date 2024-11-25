@@ -4,6 +4,8 @@ import com.koreait.surl_project_11.domain.article.article.entity.Article;
 import com.koreait.surl_project_11.domain.article.article.service.ArticleService;
 import com.koreait.surl_project_11.domain.member.member.entity.Member;
 import com.koreait.surl_project_11.domain.member.member.service.MemberService;
+import com.koreait.surl_project_11.domain.surl.surl.entity.Surl;
+import com.koreait.surl_project_11.domain.surl.surl.service.SurlService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,7 @@ public class NotProd {
 
     private final ArticleService articleService;
     private final MemberService memberService;
+    private final SurlService surlService;
 
     @Bean // 개발자가 new 하지 않아도 스프링부트가 직접 관리하는 객체
     @Order(4)
@@ -50,5 +53,11 @@ public class NotProd {
 
         Article article3 = articleService.write(memberUser2, "제목 3", "내용 3").getData();
         Article article4 = articleService.write(memberUser2, "제목 4", "내용 4").getData();
+
+        Surl surl1 = surlService.add(memberUser1, "네이버", "https://www.naver.com").getData();
+        Surl surl2 = surlService.add(memberUser1, "다음", "https://www.daum.net").getData();
+
+        Surl surl3 = surlService.add(memberUser2, "구글", "https://www.google.com").getData();
+        Surl surl4 = surlService.add(memberUser2, "네이버", "https://www.naver.com").getData();
     }
 }
