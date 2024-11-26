@@ -16,6 +16,17 @@ public class SecurityConfig {
                                 .requestMatchers("/actuator/**").permitAll()
                                 .anyRequest().authenticated()
                 )
+                .headers(
+                        headers ->
+                                headers.frameOptions(
+                                        frameOptions ->
+                                                frameOptions.sameOrigin()
+                                )
+                )
+                .csrf(
+                        csrf ->
+                                csrf.disable()
+                ) // 타임리프, MPA에서는 csrf를 사용함 // REST API 방식에서는 끈다
                 .formLogin(formLogin ->
                         formLogin.permitAll()
                 );
