@@ -31,30 +31,24 @@ public class CustomAuthenticationFilter extends OncePerRequestFilter {
     @Override
     @SneakyThrows
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse resp, FilterChain filterChain) {
-        String actorUsername = rq.getCookieValue("actorUsername", null);
-        String actorPassword = rq.getCookieValue("actorPassword", null);
-        if (actorUsername == null || actorPassword == null) {
+        String apiKey = rq.getCookieValue("apiKey", null);
+
+        if (apiKey == null) {
             String authorization = req.getHeader("Authorization");
             if (authorization != null) {
-                authorization = authorization.substring("bearer ".length());
-                String[] authorizationBits = authorization.split(" ", 2);
-                actorUsername = authorizationBits[0];
-                actorPassword = authorizationBits.length == 2 ? authorizationBits[1] : null;
+                apiKey = authorization.substring("bearer ".length());
             }
         }
-        if (Ut.str.isBlank(actorUsername) || Ut.str.isBlank(actorPassword)) {
+        if (Ut.str.isBlank(apiKey)) {
             filterChain.doFilter(req, resp);
             return;
         }
-        Member loginedMember = memberService.findByUsername(actorUsername).orElse(null);
+        Member loginedMember = memberService.findByApiKey(apiKey).orElse(null);
         if (loginedMember == null) {
             filterChain.doFilter(req, resp);
             return;
         }
-        if (!memberService.matchPassword(actorPassword, loginedMember.getPassword())) {
-            filterChain.doFilter(req, resp);
-            return;
-        }
+
         User user = new User(loginedMember.getId() + "", "", List.of());
         Authentication authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
