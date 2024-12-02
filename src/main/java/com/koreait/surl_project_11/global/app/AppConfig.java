@@ -14,6 +14,10 @@ public class AppConfig {
 
     @Getter
     public static ObjectMapper objectMapper;
+    @Getter
+    private static String jwtSecretKey;
+    @Getter
+    private static long accessTokenExpirationSec;
 
     @Autowired
     public void setObjectMapper(ObjectMapper objectMapper) {
@@ -25,16 +29,10 @@ public class AppConfig {
         return new BCryptPasswordEncoder();
     }
 
-    @Getter
-    private static String jwtSecretKey;
-
     @Value("${custom.secret.jwt.secretKey}")
     public void setJwtSecretKey(String jwtSecretKey) {
         this.jwtSecretKey = jwtSecretKey;
     }
-
-    @Getter
-    private static long accessTokenExpirationSec;
 
     @Value("${custom.accessToken.expirationSec}")
     public void setJwtSecretKey(long accessTokenExpirationSec) {

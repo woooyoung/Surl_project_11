@@ -21,17 +21,16 @@ import org.springframework.core.annotation.Order;
 @Configuration
 @RequiredArgsConstructor
 public class NotProd {
-    @Lazy
-    @Autowired
-    private NotProd self;
+    private final ArticleService articleService;
     // this를 통한 객체 내부에서의 메서드 호출은 @Transactional을 작동시키지 않아
     // 외부객에체 의한 메서드 호출은 @Transactional이 작동해
     // @Lazy, @Autowired 조합은 this의 외부 호출 모드 버전 self를 얻을 수 있다.
     // self를 통한 메서드 호출은 @Transactional을 작동 시킬 수 있어
-
-    private final ArticleService articleService;
     private final MemberService memberService;
     private final SurlService surlService;
+    @Lazy
+    @Autowired
+    private NotProd self;
 
     @Bean // 개발자가 new 하지 않아도 스프링부트가 직접 관리하는 객체
     @Order(4)
