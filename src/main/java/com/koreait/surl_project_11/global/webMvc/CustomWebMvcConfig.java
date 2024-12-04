@@ -12,7 +12,7 @@ public class CustomWebMvcConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**")
                 .allowedOrigins(
-                        AppConfig.getSiteFrontUrl()
+                        AppConfig.getSiteFrontUrl() // http://localhost:5173 or https://www.surl.abbl.site
                 )
                 .allowedMethods("*")
                 .allowedHeaders("*")
