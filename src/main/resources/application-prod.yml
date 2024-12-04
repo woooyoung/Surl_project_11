@@ -34,5 +34,8 @@ logging:
     org.springframework.transaction.interceptor: INFO
 custom:
   site:
-    name: "My Site Prod"
+    name: "SURL"
+    cookieDomain: "${custom.prod.cookieDomain}"
+    frontUrl: "${custom.prod.frontUrl}"
+    backUrl: "${custom.prod.backUrl}"
 
