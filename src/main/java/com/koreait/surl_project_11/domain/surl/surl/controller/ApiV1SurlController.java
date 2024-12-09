@@ -11,6 +11,7 @@ import com.koreait.surl_project_11.global.rq.Rq;
 import com.koreait.surl_project_11.global.rsData.RsData;
 import com.koreait.surl_project_11.standard.dto.Empty;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -29,6 +30,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 @Transactional(readOnly = true)
+@SecurityRequirement(name = "bearerAuth")
 @Tag(name = "ApiSurlController", description = "Surl CRUD 컨트롤러")
 public class ApiV1SurlController {
 

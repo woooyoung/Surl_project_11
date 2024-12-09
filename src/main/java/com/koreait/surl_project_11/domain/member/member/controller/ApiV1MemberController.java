@@ -11,6 +11,7 @@ import com.koreait.surl_project_11.global.rq.Rq;
 import com.koreait.surl_project_11.global.rsData.RsData;
 import com.koreait.surl_project_11.standard.dto.Empty;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @Slf4j
 @Transactional(readOnly = true)
+@SecurityRequirement(name = "bearerAuth")
 @Tag(name = "ApiMemberController", description = "회원 CRUD 컨트롤러")
 public class ApiV1MemberController {
     private final MemberService memberService;
@@ -85,6 +87,23 @@ public class ApiV1MemberController {
         rq.removeCookie("actorPassword");
 
         return RsData.OK;
+    }
+
+    @AllArgsConstructor
+    @Getter
+    public static class MemberMeRespBody {
+        MemberDto item;
+    }
+
+    @GetMapping("/me")
+    @Transactional
+    @Operation(summary = "내 정보", description = "현재 로그인한 회원의 정보")
+    public RsData<MemberMeRespBody> getMe() {
+        return RsData.of(
+                new MemberMeRespBody(
+                        new MemberDto(rq.getMember())
+                )
+        );
     }
 
     @AllArgsConstructor
