@@ -83,8 +83,8 @@ public class ApiV1MemberController {
     public RsData<Empty> logout() {
         // 쿠키 삭제
 
-        rq.removeCookie("actorUsername");
-        rq.removeCookie("actorPassword");
+        rq.removeCookie("accessToken");
+        rq.removeCookie("refreshToken");
 
         return RsData.OK;
     }
