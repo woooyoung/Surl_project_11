@@ -85,7 +85,7 @@ export interface paths {
         item: components["schemas"]["SurlDto"];
       };
       SurlAddReqBody: {
-        body: string;
+        body?: string;
         url: string;
       };
       RsDataSurlAddRespBody: {

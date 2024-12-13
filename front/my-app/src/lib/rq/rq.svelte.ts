@@ -75,6 +75,11 @@ class Rq {
 	public goto(url: string) {
 		goto(url);
 	}
+
+	public replace(url: string) {
+		goto(url, { replaceState: true });
+	}
+
 	public getClient() {
 		return client;
 	}
